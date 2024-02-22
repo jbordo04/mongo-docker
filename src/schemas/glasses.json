@@ -1,0 +1,8 @@
+{
+  "_id": "ObjectId",
+  "logo": "String",
+  "brand": "String",
+  "frame": ["String", "String", "String"],
+  "provider_id": "ObjectId",
+  "price": "Number"
+}

@@ -1,0 +1,13 @@
+{
+  "_id": "ObjectId",
+  "name": "String",
+  "adress": {
+    "street": "String",
+    "number": "Number",
+    "city": "String",
+    "zipcode": "String",
+    "country": "String"
+  },
+  "phone": "String",
+  "website": "String"
+}

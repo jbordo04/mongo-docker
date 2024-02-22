@@ -1,0 +1,5 @@
+{
+  "_id": "ObjectId",
+  "customer_id": "ObjectId",
+  "glasses_id": "ObjectId"
+}

@@ -1,0 +1,9 @@
+{
+  "_id": "ObjectId",
+  "name": "String",
+  "adress": "String",
+  "telf": "Number",
+  "email": "String",
+  "date": "Date",
+  "last_shopping_id": "ObjectId"
+}
