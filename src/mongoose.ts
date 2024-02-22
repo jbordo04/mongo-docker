@@ -5,7 +5,9 @@ import jsonGlasses from "./schemas/glasses.json";
 import jsonAdresses from "./schemas/adress_provider.json";
 import jsonboughtBy from "./schemas/bought_by.json";
 import jsonLastShopping from "./schemas/last_shopping.json";
-const uri = String(process.env.MONGODb_URI);
+
+const uri = String(process.env.MONGODB_COMPASS);
+// const uri = String(process.env.MONGODB_URI);
 
 async function main() {
   try {
