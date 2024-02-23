@@ -10,4 +10,4 @@ COPY . /src
 RUN npm run build
 
 EXPOSE 8085
-CMD ["node", "dist/src/mongoose.js"]cd 
+CMD ["node", "dist/src/mongoose.js"] 
