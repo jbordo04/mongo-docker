@@ -14,8 +14,7 @@ MongoDb es una base de datos noSQL( no relacional), que permite almacenar los da
 
 En este ejercicios, hemos utilizado mongoose, un ODM, de MongoDB que nos permite mediantes sus métodos acceder de manera sencilla a MongoDB.
 
-[!IMPORTANT]
-Tener la url de conexión, yo puse la propia de un cluster de mongoDBAtlas, se puede utilizar la de localhost que te da MongoDB Compass + MongoDB.
+:warning: Tener la url de conexión, yo puse la propia de un cluster de mongoDBAtlas, se puede utilizar la de localhost que te da MongoDB Compass + MongoDB. :warning:
 
 Mediante la siguiente foto, tenemos que crear las posibles datos que pudiera haber:
 
@@ -25,8 +24,7 @@ Mediante la siguiente foto, tenemos que crear las posibles datos que pudiera hab
 
 Por que utilizar docker? Docker es una plataforma de código abierto que nos permitirá ejecutar una app, en nuestro caso hacer consulta a MongoDB sin tener que instalar ni MongoDB, lo conseguiremos mediante imágenes y contenedores.
 
-[!WARNING]
-Tener Docker Desktop instalado y configurado.
+:warning: Tener Docker Desktop instalado y configurado. :warning:
 
 Guarda la imagen que contiene la config de mongo y desde donde nos conectaremos:
 
