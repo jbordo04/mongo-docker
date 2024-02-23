@@ -6,10 +6,10 @@ import jsonAdresses from "./schemas/adress_provider.json"
 import jsonboughtBy from "./schemas/bought_by.json"
 import jsonLastShopping from "./schemas/last_shopping.json"
 
-const { MONGODB_DOCKER: mongo_url, MONGODB_COMPASS: mongo_comp } = process.env
-// const uri = String(mongo_url)
-const uri = String(mongo_comp)
-// const uri = String(mongo_comp) ? String(mongo_comp) : String(mongo_url)
+const { MONGODB_DOCKER: mongo_url_doc, MONGODB_COMPASS: mongo_url_local } =
+  process.env
+
+const uri = mongo_url_doc ? String(mongo_url_doc) : String(mongo_url_local)
 
 async function main() {
   try {
@@ -153,3 +153,4 @@ async function main() {
 }
 
 main().catch((err) => console.log(err))
+// process.exit()
