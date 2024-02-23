@@ -33,7 +33,7 @@ Guarda la imagen que contiene la config de mongo y desde donde nos conectaremos:
 docker pull mongo:6-jammy
 ```
 
-Ya tenemos descarga la imagen que contiene la applicación y configuracion de mongoDb, versión 6-jammy, ahora toca configurar lo más importante, el `docker-compose.yml`, que nos dirá la configuracion de los contenedores y su relación:
+Con la palabra `pull` bajamos la imagen que contiene la aplicación y configuración de mongoDb y su versión 6-jammy, ahora toca configurar lo más importante, el `docker-compose.yml`, que nos dirá la configuración de los contenedores y su relación:
 
 ```yml
 version: "3.8"
