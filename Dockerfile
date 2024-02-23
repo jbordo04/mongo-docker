@@ -1,24 +1,17 @@
 # syntax=docker/dockerfile:1
 
 FROM node:20-alpine
-WORKDIR /usr/src/app
-COPY ./app/* ./
-COPY ./docker_run_script.mjs ./
-# COPY package.json yarn.lock ./
-
-RUN curl https://fastdl.mongodb.org/mongocli/mongodb-atlas-cli_1.3.0_linux_x86_64.tar.gz --output mongodb-atlas-cli_1.3.0_linux_x86_64.tar.gz
-RUN tar -xvf mongodb-atlas-cli_1.3.0_linux_x86_64.tar.gz && mv mongodb-atlas-cli_1.3.0_linux_x86_64 atlas_cli
-RUN chmod +x atlas_cli/bin/atlas
-RUN mv atlas_cli/bin/atlas /usr/bin/
+WORKDIR /src
+COPY package.json yarn.lock ./
 
 RUN yarn install
-RUN npm install -g zx
-COPY . .
-RUN npm install build
+COPY . /src
+# COPY . .
+RUN npm run build
 
-# EXPOSE 3000
-# CMD ["node", "dist/src/index.js"]
-CMD ["./docker_run_script.mjs"]
+EXPOSE 8085
+CMD ["node", "dist/src/mongoose.js"]
+
 
 # FROM node:20
 # WORKDIR /app

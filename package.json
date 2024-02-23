@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p .",
-    "mongo": "ts-node src/index.ts",
+    "mongo": "nodemon src/mongoose.ts",
     "eslint": "eslint \"./**/*.{js,ts}\""
   },
   "author": "thejbordo <joan.bordonaba@gmail.com>",

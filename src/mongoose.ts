@@ -1,37 +1,39 @@
-import "dotenv/config";
-import mongoose from "mongoose";
-import jsonCustomer from "./schemas/customer.json";
-import jsonGlasses from "./schemas/glasses.json";
-import jsonAdresses from "./schemas/adress_provider.json";
-import jsonboughtBy from "./schemas/bought_by.json";
-import jsonLastShopping from "./schemas/last_shopping.json";
+import "dotenv/config"
+import mongoose from "mongoose"
+import jsonCustomer from "./schemas/customer.json"
+import jsonGlasses from "./schemas/glasses.json"
+import jsonAdresses from "./schemas/adress_provider.json"
+import jsonboughtBy from "./schemas/bought_by.json"
+import jsonLastShopping from "./schemas/last_shopping.json"
 
-const uri = String(process.env.MONGODB_COMPASS);
-// const uri = String(process.env.MONGODB_URI);
+const { MONGODB_DOCKER: mongo_url, MONGODB_COMPASS: mongo_comp } = process.env
+// const uri = String(mongo_url)
+const uri = String(mongo_comp)
+// const uri = String(mongo_comp) ? String(mongo_comp) : String(mongo_url)
 
 async function main() {
   try {
-    await mongoose.connect(uri);
-    const customerSchema = new mongoose.Schema(jsonCustomer);
-    const lastShoppingSchema = new mongoose.Schema(jsonLastShopping);
-    const glassesSchema = new mongoose.Schema(jsonGlasses);
-    const adressSchema = new mongoose.Schema(jsonAdresses);
-    const boughtBySchema = new mongoose.Schema(jsonboughtBy);
+    await mongoose.connect(uri)
+    const customerSchema = new mongoose.Schema(jsonCustomer)
+    const lastShoppingSchema = new mongoose.Schema(jsonLastShopping)
+    const glassesSchema = new mongoose.Schema(jsonGlasses)
+    const adressSchema = new mongoose.Schema(jsonAdresses)
+    const boughtBySchema = new mongoose.Schema(jsonboughtBy)
 
     //Model() makes a copy of schema! Make sure that you-ve addes everything
     //First Arg is a singular name of the collection
-    const Customer = mongoose.model("Customer", customerSchema);
-    const LastShopping = mongoose.model("LastShooping", lastShoppingSchema);
-    const Glasses = mongoose.model("Glasses", glassesSchema);
-    const Adress = mongoose.model("Adress", adressSchema);
-    const BoughtBy = mongoose.model("BoughtBy", boughtBySchema);
+    const Customer = mongoose.model("Customer", customerSchema)
+    const LastShopping = mongoose.model("LastShooping", lastShoppingSchema)
+    const Glasses = mongoose.model("Glasses", glassesSchema)
+    const Adress = mongoose.model("Adress", adressSchema)
+    const BoughtBy = mongoose.model("BoughtBy", boughtBySchema)
 
     //Vaciamos las colleciones para tener unas coleccione limpias
-    await LastShopping.deleteMany({});
-    await Adress.deleteMany({});
+    await LastShopping.deleteMany({})
+    await Adress.deleteMany({})
     // await BoughtBy.deleteMany({})
-    await Glasses.deleteMany({});
-    await Customer.deleteMany({});
+    await Glasses.deleteMany({})
+    await Customer.deleteMany({})
 
     //Ya guarda automaticamente el metodo insertMany()
     const lastShooping = await LastShopping.insertMany([
@@ -65,9 +67,9 @@ async function main() {
         frame_type: "Light",
         price: 80.0,
       },
-    ]);
+    ])
     //collecionamos todas las id, para rellenar las relaciones de las colleciones
-    const lastShippId = lastShooping.map((item) => item._id);
+    const lastShippId = lastShooping.map((item) => item._id)
 
     const customer = await Customer.insertMany([
       {
@@ -88,9 +90,9 @@ async function main() {
         date: Date.now(),
         last_shopping_id: lastShippId[2],
       },
-    ]);
+    ])
 
-    const customerId = customer.map((cust) => cust._id);
+    const customerId = customer.map((cust) => cust._id)
 
     const glasses = new Glasses({
       _id: new mongoose.Types.ObjectId(),
@@ -99,10 +101,10 @@ async function main() {
       frame: "Metallic",
       adress_id: "Google Associated SL",
       price: 105.75,
-    });
+    })
 
-    await glasses.save();
-    const glassesId = glasses._id;
+    await glasses.save()
+    const glassesId = glasses._id
 
     const adress = new Adress({
       _id: new mongoose.Types.ObjectId(),
@@ -116,9 +118,9 @@ async function main() {
       },
       phone: "652343525",
       website: "www.google.com/contact",
-    });
+    })
 
-    await adress.save();
+    await adress.save()
 
     BoughtBy.insertMany([
       {
@@ -131,23 +133,23 @@ async function main() {
         customer_id: customerId[1],
         glasses_id: glassesId,
       },
-    ]);
+    ])
 
     Adress.find().then((result) => {
-      console.log(result.length); //Devuelve
-    });
+      console.log(result.length) //Devuelve
+    })
 
-    const result = await BoughtBy.find({ glasses_id: glassesId });
+    const result = await BoughtBy.find({ glasses_id: glassesId })
     const result2 = await LastShopping.find({ brand: "Rayban" })
       .where("price")
-      .gte(200);
+      .gte(200)
 
-    console.log("asd", result); //Devuelve todo, 2 resultados
-    console.log("asdf", result2); //Solo cumple 1 la condición
+    console.log("asd", result) //Devuelve todo, 2 resultados
+    console.log("asdf", result2) //Solo cumple 1 la condición
   } finally {
-    await mongoose.connection.close();
-    console.log("Closed successfully!!");
+    await mongoose.connection.close()
+    console.log("Closed successfully!!")
   }
 }
 
-main().catch((err) => console.log(err));
+main().catch((err) => console.log(err))
