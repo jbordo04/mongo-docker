@@ -18,7 +18,8 @@ En este ejercicios, hemos utilizado mongoose, un ODM, de MongoDB que nos permite
 
 Mediante la siguiente foto, tenemos que crear las posibles datos que pudiera haber:
 
-!['foto'](./capt1.jpg.jpg)
+!['foto'](./capt1.jpg)
+!['foto'](./capt0.jpg)
 
 ## Docker
 
